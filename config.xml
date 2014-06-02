@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.phonegap.tawgsms"
+        versionCode="10" 
+        version   = "1.0.0">
+
+
+    <name>TawgSMS&reg;</name>
+
+    <description>
+       A simple text messaging App for the The Abiding Word Gathering, University of Nigeria. 
+    </description>
+
+    <author href="http://www.about.me/ojengwa" email="bernardojengwa@gmail.com">
+        Ojengwa Bernard
+    </author>
+    
+    <gap:platform name="webos" />
+    <gap:platform name="android" />
+    <gap:platform name="symbian" />
+    <gap:platform name="blackberry" />
+    <gap:platform name="winphone" />
+
+        
+    <preference name="orienation" value="default" />
+    <preference name="fullscreen" value="true" />
+    <preference name="android-minSdkVersion" value="11" />
+    <preference name="disable-cursor" value="true" />
+
+
+    <icon src="icon.jpg" width="64px" height="64"/>
+    <icon src="icon.jpg" gap:platform="android" gap:density="ldpi" />
+    <icon src="icon.jpg" gap:platform="android" gap:density="mdpi" />
+    <icon src="icon.jpg" gap:platform="android" gap:density="hdpi" />
+    <icon src="icon.jpg" gap:platform="android" gap:density="xhdpi" />
+    <icon src="icon.jpg" gap:platform="blackberry" />
+    <icon src="icon.jpg" gap:platform="winphone" />
+    <icon src="icon.jpg" gap:platform="webos" />
+    <icon src="icon.jpg" gap:platform="webos" gap:role="mini" />
+
+
+    <gap:splash src="splash.jpg" />
+    <gap:splash src="splash.jpg" gap:platform="ios" width="320" height="480" />
+    <gap:splash src="splash.jpg" gap:platform="android" gap:density="ldpi" />
+    <gap:splash src="splash.jpg" gap:platform="android" gap:density="mdpi" />
+    <gap:splash src="splash.jpg" gap:platform="android" gap:density="hdpi" />
+    <gap:splash src="splash.jpg" gap:platform="android" gap:density="xhdpi" />
+    <gap:splash src="splash.jpg" gap:platform="blackberry" />
+    <gap:splash src="splash.jpg" gap:platform="winphone" />
+    
+    <preference name="splash-screen-duration" value="5000"/>
+
+    <access origin="*" subdomains="true" />
+
+</widget>

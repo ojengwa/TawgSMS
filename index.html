@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.flatui.css" />
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.mobile-1.4.0-rc.1.js"></script>
+  <script>
+    $(function(){
+        hosts = "http://bernard.com/test.php";
+        //Process for login form
+        $("#log").submit(function(){
+            var name = $("#user").val();
+            var pass = $("#pass").val();
+            if(name == "admin" && pass == "concert"){
+                window.location = '#home';
+            }
+            else{
+                alert("Wrong username and/or Password \n Please try again!");
+            }
+        });
+        
+        //Count the number of chars typed in SMS 1
+        $("#msg1").keyup(function(){
+            var count = $("#msg1").val().length;
+            if(count > 160){
+                $("#count1").css('color', 'red');
+                $("#count1").text(count + "  Chars");
+            }
+            else{
+                $("#count1").css('color', '#000');
+                $("#count1").text(count + "  Chars");
+            }
+        });
+        
+        //Count the number of chars typed in SMS 2
+        $("#msg2").keyup(function(){
+            var count = $("#msg2").val().length;
+            if(count > 160){
+                $("#count2").css('color', 'red');
+                $("#count2").text(count + "  Chars");
+            }
+            else{
+                $("#count2").css('color', '#000');
+                $("#count2").text(count + "  Chars");
+            }
+        });
+        
+        //Process first form
+        $("#form1").submit(function(){
+            var form1 = $("#form1").serialize();
+            $.post(hosts, form1, function(data){
+                alert(data);
+            });
+            return false;
+        });
+
+        //Process Single sending form
+        $("#form2").submit(function(){
+            var form2 = $("#form2").serialize();
+            $.post(hosts, form2, function(data){
+                alert(data);
+            });
+            return false;
+        });
+        
+        //Process Uploading phone number
+        $("#form3").submit(function(){
+            var form3 = $("#form3").serialize();
+            $.post(hosts, form3, function(data){
+                alert(data);
+            });
+            return false;
+        });
+    });
+  </script>
+  <script>
+    function bal(){
+        $.post("http://bernard.com/test.php", "seed=4", function(data){
+            $("#amount").text(data);
+        });
+    }
+  </script>
+</head>
+<body>
+  <div data-role='page' style="background:url('bg.jpg') center no-repeat; background-size:cover; opacity:0.8" id = 'login'>
+    <div data-role='content' style="margin-top:22%;">
+     <form data-ajax="false" id='log'>
+      <div data-role="fieldcontain">
+        <input type="text" name="user" placeholder="Username" id="user" autofocus>
+        
+        <input type="password" name="pass" id="pass"  placeholder="Password" maxlength="150" data-highlight="true">
+      </div>
+      <div data-role="fieldcontain">
+        <div  class="ui-grid-a">
+          <input type="submit"  class="ui-block-a"  data-theme="d" value="Login">
+        </div>
+      </div>
+     </form>
+    </div>
+    <div data-role="footer" data-position="fixed" >
+       <small><center>&copy; <script rel="javascript">var d = new Date; document.write(d.getFullYear()); </script></center></small>
+    </div>
+  </div>
+  
+  <div data-role="page" id="home">
+
+   <div data-role="panel" id="panel" style="background:#f2f2f1;" data-position="left" data-theme="a" >
+    <div data-role="header">
+     <h1>Menu</h1>
+     <a data-role="button" data-iconpos="notext" data-position="right" data-icon="flat-cross" data-theme="d" data-rel="close" data-inline="true"></a>
+    </div>
+    <div data-role="controlgroup" data-theme="c">
+     <a href="#others" class="ui-btn  ui-icon-mail ui-btn-icon-right">Special Messages</a>
+     <a href="#phone" class="ui-btn  ui-icon-phone ui-btn-icon-right">Add Numbers</a>
+     <a href="#bal" class="ui-btn  ui-icon-shop ui-btn-icon-right" onclick="bal()">Account Balance</a>
+     <a href="#about" class="ui-btn  ui-icon-info ui-btn-icon-right">About</a>
+     <a href="#login"  class="ui-btn  ui-icon-lock ui-btn-icon-right">Logout</a>
+    </div>
+   </div>
+
+    <div data-role="header" data-position="fixed">
+      <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu" title="Click to open the menu">Menu</a>
+      <h1>TawgSMS&trade;</h1>
+      <a href="#home" data-iconpos="notext" data-role="button" data-icon="home" title="Home">Home</a>
+    </div>
+
+    <div data-role="content" role="main">
+     <p style="text-align:center">This form is for sending general text messages to brethren...<br><small>For other options, click the side panel.</small></p>
+
+     <form  id="form1" method="post" data-ajax="false" name='form1'>
+         <input type="hidden" name="seed" value="1" required>
+      <div data-role="fieldcontain">
+        <label for="sended">Sender:</label>
+        <input type="text" name="sended" value="TAWG UNN" disabled required>
+      </div>
+      <div data-role="fieldcontain">
+        <label for="msg1">Message: <small id="count1" style="font-size:0.7em; display:block; float:right">0 &nbsp;Chars</small></label>
+        <textarea  name="msg1" id="msg1" maxlength="300"  data-highlight="true" required></textarea>
+      </div>
+      <div id="bg" data-role="fieldcontain">
+        <input type="submit" class="ui-block-a"  data-theme="g" value="Send SMS">
+      </div>
+     </form>
+    </div>
+    <div data-role="footer" data-position="fixed" >
+       <small><center>&copy; <script rel="javascript">var d = new Date; document.write(d.getFullYear()); </script></center></small>
+    </div>
+  </div>
+
+  <div data-role="page" id="others">
+
+   <div data-role="panel" id="panel" style="background:#f2f2f1;" data-position="left" data-theme="a" >
+    <div data-role="header">
+     <h1>Menu</h1>
+     <a data-role="button" data-iconpos="notext" data-position="right" data-icon="flat-cross" data-theme="d" data-rel="close" data-inline="true"></a>
+    </div>
+    <div data-role="controlgroup" data-theme="c">
+     <a href="#others" class="ui-btn  ui-icon-mail ui-btn-icon-right">Special Messages</a>
+     <a href="#phone" class="ui-btn  ui-icon-phone ui-btn-icon-right">Add Numbers</a>
+     <a href="#bal" class="ui-btn  ui-icon-shop ui-btn-icon-right" onclick="bal()">Account Balance</a>
+     <a href="#about" class="ui-btn  ui-icon-heart ui-btn-icon-right">About</a>
+     <a href="#login" class="ui-btn  ui-icon-lock ui-btn-icon-right">Logout</a>
+    </div>
+   </div>
+
+    <div data-role="header" data-position="fixed">
+      <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu" title="Click to open the menu">Menu</a>
+      <h1>TawgSMS&trade;</h1>
+      <a href="#home" data-iconpos="notext" data-role="button" data-icon="home" title="Home">Home</a>
+    </div>
+
+    <div data-role="content" role="main">
+     <p style="text-align:center">You can send one-time messages from here.<br><small>Examples: first-timers, Units reminders...</small></p>
+
+     <form data-ajax="false" name="form2" id="form2" method="post">
+         <input type="hidden" name="seed" value="2" required>
+      <div data-role="fieldcontain">
+        <label for="sender2">Sender:</label>
+        <input type="text" name="sender2" id="sender2" value="TAWG UNN" required>
+      </div>
+      <div data-role="fieldcontain">
+        <label for="msg">Message: <small id="count2" style="font-size:0.7em; display:block; float:right">0 &nbsp;Chars</small></label>
+        <textarea name="msg2" id="msg2" cols="40" rows="20"  maxlength="150" data-highlight="true" required></textarea>
+      </div>
+      <div data-role="fieldcontain">
+        <label for="nums2">Recipients:</label>
+        <textarea name="nums2" id="nums2" cols="40" rows="20"  placeholder="Seperate each number with a comma" data-highlight="true" required></textarea>
+      </div>
+      <div data-role="fieldcontain">
+        <div  class="ui-grid-a">
+          <input type="submit" class="ui-block-a" data-theme="g" value="Send SMS">
+        </div>
+      </div>
+     </form>
+    </div>
+    <div data-role="footer" data-position="fixed" >
+       <small><center>&copy; <script rel="javascript">var d = new Date; document.write(d.getFullYear()); </script></center></small>
+    </div>
+  </div>
+
+  <div data-role="page" id="phone">
+
+   <div data-role="panel" id="panel" style="background:#f2f2f1;" data-position="left" data-theme="a">
+    <div data-role="header">
+     <h1>Menu</h1>
+     <a data-role="button" data-iconpos="notext" data-position="right" data-icon="flat-cross" data-theme="d" data-rel="close" data-inline="true"></a>
+    </div>
+    <div data-role="controlgroup" data-theme="c">
+     <a href="#others" class="ui-btn  ui-icon-mail ui-btn-icon-right">Special Messages</a>
+     <a href="#phone" class="ui-btn  ui-icon-phone ui-btn-icon-right">Add Numbers</a>
+     <a href="#bal" class="ui-btn  ui-icon-shop ui-btn-icon-right" onclick="bal()">Account Balance</a>
+     <a href="#about" class="ui-btn  ui-icon-heart ui-btn-icon-right">About</a>
+     <a href="#login" class="ui-btn  ui-icon-lock ui-btn-icon-right">Logout</a>
+    </div>
+   </div>
+
+    <div data-role="header" data-position="fixed">
+      <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu" title="Click to open the menu">Menu</a>
+      <h1>TawgSMS&trade;</h1>
+      <a href="#home" data-iconpos="notext" data-role="button" data-icon="home" title="Home">Home</a>
+    </div>
+
+    <div data-role="content" role="main">
+     <p style="text-align:center">Upload bulk phone numbers to the server.<br><small>For other options, click the side panel.</small></p>
+
+     <form data-ajax="false" name="form3" id="form3" method="post">
+         <input type="hidden" name="seed" value="3" required>
+      <div data-role="fieldcontain">
+        <label for="user1">Name:</label>
+        <input type="text" name="user1" id="user1" value="" placeholder="Enter your name" required>
+      </div>
+      <div data-role="fieldcontain">
+        <label for="date">Date:</label>
+        <input type="date" name="date1" id="date1" value="" required>
+      </div>
+      <div data-role="fieldcontain">
+        <label for="nums">Numbers:</label>
+        <textarea type="text" name="num" id="num" cols="40" rows="20" placeholder="Seperate each number with a comma" data-highlight="true" required></textarea>
+      </div>
+      <div data-role="fieldcontain">
+        <div  class="ui-grid-a">
+          <input type="submit" name="send" class="ui-block-a" onclick="send3()" data-theme="g" value="Send SMS">
+        </div>
+      </div>
+     </form>
+    </div>
+    <div data-role="footer" data-position="fixed" >
+       <small><center>&copy; <script rel="javascript">var d = new Date; document.write(d.getFullYear()); </script></center></small>
+    </div>
+  </div>
+
+  <div data-role="page" id="bal">
+
+   <div data-role="panel" id="panel" style="background:#f2f2f1;" data-position="left" data-theme="a" >
+    <div data-role="header">
+     <h1>Menu</h1>
+     <a data-role="button" data-iconpos="notext" data-position="right" data-icon="flat-cross" data-theme="d" data-rel="close" data-inline="true"></a>
+    </div>
+    <div data-role="controlgroup" data-theme="c">
+     <a href="#others" class="ui-btn  ui-icon-mail ui-btn-icon-right">Special Messages</a>
+     <a href="#phone" class="ui-btn  ui-icon-phone ui-btn-icon-right">Add Numbers</a>
+     <a href="#bal" onclick="bal()" class="ui-btn  ui-icon-shop ui-btn-icon-right" onclick="bal()">Account Balance</a>
+     <a href="#about" class="ui-btn  ui-icon-heart ui-btn-icon-right">About</a>
+     <a href="#login"  class="ui-btn  ui-icon-lock ui-btn-icon-right">Logout</a>
+    </div>
+   </div>
+
+    <div data-role="header" data-position="fixed">
+      <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu" title="Click to open the menu">Menu</a>
+      <h1>TawgSMS&trade;</h1>
+      <a href="#home" data-iconpos="notext" data-role="button" data-icon="home" title="Home">Home</a>
+    </div>
+
+    <div data-role="content" role="main">
+     <p style="text-align:center">There is a total of <strong  ><span id="amount">0.00</span> Units</strong> remaining.<br><button onclick="bal()" data-theme="g">Re-check Balance</button><br><small> For other options, click the side panel.</small></p>
+    </div>
+    <div data-role="footer" data-position="fixed" >
+       <small><center>&copy; <script rel="javascript">var d = new Date; document.write(d.getFullYear()); </script></center></small>
+    </div>
+  </div>
+
+  <div data-role="page" id="about" data-dialog="true">
+
+    <div data-role="header" data-position="fixed">
+      <h1>About</h1>
+    </div>
+
+    <div data-role="content" role="main">
+     <p style="text-align:center">TawgSMS is a multi-platform bulk text messenger for Android, Blackberry, Windows Phone, Symbian 3+, and WebOS for The Abiding Word Gathering, UNN.<br><small>Brought to you by the Intensive Care Unit (ICU)</small></p>
+    </div>
+    <div data-role="footer" data-position="fixed" >
+       <small><center>&copy; <script rel="javascript">var d = new Date; document.write(d.getFullYear()); </script></center></small>
+    </div>
+  </div>
+</body>
+</html>
